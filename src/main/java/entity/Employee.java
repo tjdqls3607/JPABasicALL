@@ -12,7 +12,8 @@ public class Employee {
 	// key 생성 방법
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)	// hibernate 가 위임 (hibernate 가 DB 에 맞게 알아서 처리- mysql: SEQUENCE)
+//  @GeneratedValue(strategy = GenerationType.AUTO)	// hibernate 가 위임 (hibernate 가 DB 에 맞게 알아서 처리- mysql: SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)	
     private int id;
     private String name;
     private String address;
