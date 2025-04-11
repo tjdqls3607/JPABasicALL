@@ -31,7 +31,17 @@ public class Test {
 		emp.setName("홍길동");
 		emp.setAddress("서울 어디");
 		
+		Employee emp2 = new Employee();
+		emp2.setName("홍길동");
+		emp2.setAddress("서울 어디2");
+		
+		
 		em.persist(emp);
+		em.persist(emp2);
+		
+		
+		
+		
 		
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
 //				em.close();
