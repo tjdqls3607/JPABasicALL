@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Test {
+	
 
 	public static void main(String[] args) {
 		// EntityManager <= EntityManagerFactory
@@ -32,7 +33,7 @@ public class Test {
 		emp.setAddress("서울 어디");
 		
 		Employee emp2 = new Employee();
-		emp2.setName("홍길동");
+		emp2.setName("홍길동2");
 		emp2.setAddress("서울 어디2");
 		
 		
