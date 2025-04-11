@@ -4,8 +4,8 @@ import java.util.Map;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import config.MyPersistenceUnitInfo;
-import entity.Product;
-import entity.key.ProductKey;
+import entity.Student;
+import entity.key.StudentKey;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -28,7 +28,7 @@ public class Test2 {
 		em.getTransaction().begin();
 		
 		// @Idclass()
-		{
+//		{
 //			Product p = new Product();
 //			p.setCode("uplus");
 //			p.setNumber(1);
@@ -37,13 +37,33 @@ public class Test2 {
 //			em.persist(p);
 			// Hibernate: insert into Product (color,code,number) values (?,?,?)
 			
-			ProductKey key = new ProductKey();
+//			ProductKey key = new ProductKey();
+//			key.setCode("uplus");
+//			key.setNumber(1);
+//			Product p = em.find(Product.class, key);
+//			System.out.println(p);
+//		}
+		
+		// Embedded
+		// 항상 임베드 키 로부터 접근
+		{
+//			StudentKey key = new StudentKey();
+//			key.setCode("uplus");
+//			key.setNumber(1);
+			
+//			Student s = new Student();
+//			s.setId(key);
+//			s.setName("홍길동");
+//			
+//			em.persist(s);
+			
+			StudentKey key = new StudentKey();
 			key.setCode("uplus");
 			key.setNumber(1);
-			Product p = em.find(Product.class, key);
-			System.out.println(p);
+			
+			StudentKey s = em.find(Student.class, key);
+			System.out.println(s);
 		}
-		
 		
 	
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.

@@ -69,7 +69,7 @@ public class MyPersistenceUnitInfo implements PersistenceUnitInfo{
 	@Override
 	public List<String> getManagedClassNames() {
 		// TODO Auto-generated method stub
-		return List.of("entity.Employee", "entity.Product");
+		return List.of("entity.Employee", "entity.Product", "entity.Student");
 	}
 
 	@Override
