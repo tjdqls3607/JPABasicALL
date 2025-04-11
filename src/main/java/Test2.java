@@ -61,7 +61,7 @@ public class Test2 {
 			key.setCode("uplus");
 			key.setNumber(1);
 			
-			StudentKey s = em.find(Student.class, key);
+			Student s = em.find(Student.class, key);
 			System.out.println(s);
 		}
 		
