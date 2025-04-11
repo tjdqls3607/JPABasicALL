@@ -1,14 +1,18 @@
 package entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "employee")
 public class Employee {
     
+	// key 생성 방법
     @Id
     @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)	// hibernate 가 위임 (hibernate 가 DB 에 맞게 알아서 처리- mysql: SEQUENCE)
     private int id;
     private String name;
     private String address;
