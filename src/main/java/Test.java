@@ -7,6 +7,7 @@ import org.hibernate.jpa.HibernatePersistenceProvider;
 import java.util.HashMap;
 import java.util.Map;
 
+// key 칼럼에 대한 다양한 방법이 있지만, @GeneratedValue(strategy = GenerationType.IDENTITY) 기본으로 사용. <= auto increment key column 생성
 public class Test {
 	
 

@@ -17,6 +17,8 @@ public class Employee {
     // GenerationType.SEQUENCE, GenerationType.TABLE 은 별도의 TABLE 또는 시퀀스를 만든다
     @GeneratedValue(strategy = GenerationType.UUID)
 //    private int id;
+    
+    
     private String id;
     private String name;
     private String address;
