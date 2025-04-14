@@ -107,7 +107,7 @@ public class Test {
 		// org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'entity.Passport' (save the transient instance before flushing)
 		
 		// 7-2
-		em.persist(passport);
+//		em.persist(passport);
 		//  org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'entity.Person' (save the transient instance before flushing)
 		// 양방향 일 경우, passport 만 persist 하지 못한다. ( 단방향 일 경우, 가능 )
 		

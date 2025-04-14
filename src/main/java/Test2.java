@@ -38,15 +38,16 @@ public class Test2 {
 //		System.out.println(person);
 		
 		// #2. find Passport
-//		Passport passport = em.find(Passport.class, 1);
+		Passport passport = em.find(Passport.class, 1);
 //		// Hibernate: select p1_0.id,p1_0.number from Passport p1_0 where p1_0.id=?
-//		// Passport 객체만 select
+//		// join 으로 Person 객체도 select
+		// fetch=FetchType.LAZY 로 변경해도 Person 필드를 채우기 위해서 Person 객체를 가져오는 join 문이 함께 실행된다.( 의미 없다. )
 		
 		// #3. @OneToOne(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
-		Person person = em.find(Person.class, 1);
+//		Person person = em.find(Person.class, 1);
 		// Hibernate: select p1_0.id,p1_0.name,p1_0.passport from Person p1_0 where p1_0.id=?
 		// toString 에서 passport 를 사용하는 코드를 통해 사용시점에 select 
-		System.out.println(person);
+//		System.out.println(person);
 		// Hibernate: select p1_0.id,p1_0.number from Passport p1_0 where p1_0.id=?
 		// Person [id=1, name=홍길동, passport=Passport [id=1, number=KOR124]]
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
