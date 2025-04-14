@@ -93,10 +93,23 @@ public class Test {
 		
 		
 		// #6. 객체 연결, Person 의 @OneToOne (cascade=CascadeType.PERSIST) 추가
-		person.setPassport(passport);
+//		person.setPassport(passport);
+//		
+//		em.persist(passport);
 		
+		
+		// #7. 객체 연결 양방향 @OneToOne 은 초기값 cascade=CascadeType.PERSIST 제외
+		person.setPassport(passport);
+		passport.setPerson(person);
+		
+		// 7-1
+//		em.persist(person);
+		// org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'entity.Passport' (save the transient instance before flushing)
+		
+		// 7-2
 		em.persist(passport);
-
+		//  org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'entity.Person' (save the transient instance before flushing)
+		
 		
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
 		

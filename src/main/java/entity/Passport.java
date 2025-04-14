@@ -33,6 +33,15 @@ public class Passport {
 		this.number = number;
 	}
 	
+	
+	public Person getPerson() {
+		return person;
+	}
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Passport [id=" + id + ", number=" + number + "]";	// toString() 에 Person 포함 X
