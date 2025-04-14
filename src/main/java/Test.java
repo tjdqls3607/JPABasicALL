@@ -99,8 +99,8 @@ public class Test {
 		
 		
 		// #7. 객체 연결 양방향 @OneToOne 은 초기값 cascade=CascadeType.PERSIST 제외
-		person.setPassport(passport);
-		passport.setPerson(person);
+//		person.setPassport(passport);
+//		passport.setPerson(person);
 		
 		// 7-1
 //		em.persist(person);
@@ -109,7 +109,7 @@ public class Test {
 		// 7-2
 		em.persist(passport);
 		//  org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'entity.Person' (save the transient instance before flushing)
-		
+		// 양방향 일 경우, passport 만 persist 하지 못한다. ( 단방향 일 경우, 가능 )
 		
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
 		
