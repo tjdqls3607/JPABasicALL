@@ -1,5 +1,6 @@
 package entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ public class Passport {
 	
 	// Ownership 을 가진 entity 인 Person 의 passport 와 연계, passport table
 	// person 관련 칼럼이 만들어 지지 않는다.
-	@OneToOne(mappedBy="passport", fetch=FetchType.LAZY)	
+	@OneToOne(mappedBy="passport", fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)	
 	private Person person;
 	
 	public int getId() {
