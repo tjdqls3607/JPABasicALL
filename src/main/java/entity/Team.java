@@ -2,6 +2,7 @@ package entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class Team {
 	
 	private String name;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(
 		name="teams_users",
 		joinColumns=@JoinColumn(name="team_id"),	// Team Entity 와 join 될 teams_users 의 column name

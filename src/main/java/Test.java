@@ -79,7 +79,59 @@ public class Test {
 //		Hibernate: insert into users (name) values (?)
 		
 		
-		// #5. Team 객체 2개 User 객체 2개 연결, 모두 persist
+//		// #5. Team 객체 2개 User 객체 2개 연결, 모두 persist
+//		Team t1 = new Team();
+//		t1.setName("팀1");
+//		
+//		Team t2 = new Team();
+//		t2.setName("팀2");
+//		
+//		User u1 = new User();
+//		u1.setName("홍길동");
+//		
+//		User u2 = new User();
+//		u2.setName("이길동");
+//		
+//		// 연결코드
+//		t1.setUsers(List.of(u1, u2));	// t1에 u1, u2 포함
+//		t2.setUsers(List.of(u2));	// t2에 u2 포함
+//		em.persist(t1);
+//		em.persist(t2);
+//		
+//		em.persist(u1);
+//		em.persist(u2);
+////		Hibernate: insert into teams (name) values (?)
+////		Hibernate: insert into teams (name) values (?)
+////		Hibernate: insert into users (name) values (?)
+////		Hibernate: insert into users (name) values (?)
+////		Hibernate: insert into teams_users (team_id,user_id) values (?,?)
+////		Hibernate: insert into teams_users (team_id,user_id) values (?,?)
+////		Hibernate: insert into teams_users (team_id,user_id) values (?,?)
+		
+		
+//		// #6. Team 객체 2개 User 객체 2개 연결, Team만 persist
+//		Team t1 = new Team();
+//		t1.setName("팀1");
+//		
+//		Team t2 = new Team();
+//		t2.setName("팀2");
+//		
+//		User u1 = new User();
+//		u1.setName("홍길동");
+//		
+//		User u2 = new User();
+//		u2.setName("이길동");
+//		
+//		// 연결코드
+//		t1.setUsers(List.of(u1, u2));	// t1에 u1, u2 포함
+//		t2.setUsers(List.of(u2));	// t2에 u2 포함
+//		
+//		em.persist(t1);
+//		em.persist(t2);
+		//  org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'entity.User' (save the transient instance before flushing)
+		
+		
+		// #7. Team 객체 2개 User 객체 2개 연결, Team에 CascadeType=PERSIST 설정
 		Team t1 = new Team();
 		t1.setName("팀1");
 		
@@ -95,18 +147,19 @@ public class Test {
 		// 연결코드
 		t1.setUsers(List.of(u1, u2));	// t1에 u1, u2 포함
 		t2.setUsers(List.of(u2));	// t2에 u2 포함
+		
 		em.persist(t1);
 		em.persist(t2);
+//		Hibernate: insert into teams (name) values (?)
+//		Hibernate: insert into users (name) values (?)
+//		Hibernate: insert into users (name) values (?)
+//		Hibernate: insert into teams (name) values (?)
+//		Hibernate: insert into teams_users (team_id,user_id) values (?,?)
+//		Hibernate: insert into teams_users (team_id,user_id) values (?,?)
+//		Hibernate: insert into teams_users (team_id,user_id) values (?,?)
 		
-		em.persist(u1);
-		em.persist(u2);
-//		Hibernate: insert into teams (name) values (?)
-//		Hibernate: insert into teams (name) values (?)
-//		Hibernate: insert into users (name) values (?)
-//		Hibernate: insert into users (name) values (?)
-//		Hibernate: insert into teams_users (team_id,user_id) values (?,?)
-//		Hibernate: insert into teams_users (team_id,user_id) values (?,?)
-//		Hibernate: insert into teams_users (team_id,user_id) values (?,?)
+		
+		//#8. #9 
 		
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
 		
