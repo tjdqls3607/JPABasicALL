@@ -2,6 +2,7 @@ package entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +18,10 @@ public class Post {
 	private String title;
 	private String content;
 	
-	@OneToMany
+//	@OneToMany 
+//	private List<Comment> comments;
+	
+	@OneToMany (cascade=CascadeType.PERSIST)
 	private List<Comment> comments;
 	
 	public int getId() {
