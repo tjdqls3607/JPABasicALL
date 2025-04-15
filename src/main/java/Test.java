@@ -29,6 +29,7 @@ public class Test {
 		em.getTransaction().begin();
 		
 		Post p = new Post();
+		p.setTitle("게시글 1 제목");
 		p.setContent("게시글 1");
 		
 		Comment c1 = new Comment();
@@ -85,7 +86,7 @@ public class Test {
 		
 		em.persist(p);
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
-
+		// Hibernate: insert into Post (content,title) values (?,?)
 		
 
 		em.close();
