@@ -11,6 +11,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.FetchType;
 
+//ManyToOne - OneToMany BI
+//1. ManyToOne 을 가진 테이블이 Owing Entity
+//2. Comment, Post 2개의 테이블이 생성
+//3. 연관관계를 Comment 의 post_id 칼럼으로 처리
 // find
 public class Test2 {
 
@@ -27,67 +31,22 @@ public class Test2 {
 
 		em.getTransaction().begin();
 		
-		// #1 FetchType 설정없이 Post 객체만 find
-//		Post p = em.find(Post.class, 1);
-		// Hibernate: select p1_0.id,p1_0.content,p1_0.title from Post p1_0 where p1_0.id=?
-		// OneToMany 의 One 에 해당하는 Post 에 닳린 Many에 해당하는 Comment 가 매우 많을 수 있는 복수개 이므로
-		// 기본 fetch 옵션은 LAZY
-		
-//		// #2 FetchType 설정없이 Comment 객체만 find
-//		Comment c1 = em.find(Comment.class, 1);
-//		// Hibernate: select c1_0.id,c1_0.content from Comment c1_0 where c1_0.id=?
-//		// OneToMany 의 One 에 해당하는 Comment 는 연관관계가 없으므로 독립적으로 select 수행
-		
-//		// #3 FetchType 설정없이 Post 객체만 find, Post 객체의 comments 사용
-//		Post p = em.find(Post.class, 1);
-////		p.getComments();	// 참조변수만 가져오는 것으로 Comment 객체를 사용 코드X
-//		
-//		try {
-//			Thread.sleep(5000);
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		p.getComments().forEach(comment -> System.out.println(comment));
-////		p.getComments().forEach(System.out::println);
-//		Hibernate: select p1_0.id,p1_0.content,p1_0.title from Post p1_0 where p1_0.id=?
-//		Hibernate: select c1_0.Post_id,c1_1.id,c1_1.content from Post_Comment c1_0 join Comment c1_1 on c1_1.id=c1_0.comments_id where c1_0.Post_id=?
-		// OneToMany 의 기본 fetch 옵션은 LAZY 이므로 사용하는 시점에 다시 select
-		
-		// #4 FetchType.EAGER 로 설정, Post 객체만 find, Post 객체의 comments 사용
-//		Post p = em.find(Post.class, 1);
-//		
-//		try {
-//			Thread.sleep(5000);
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		p.getComments().forEach(comment -> System.out.println(comment));
-//		Hibernate: select c1_0.Post_id,c1_1.id,c1_1.content from Post_Comment c1_0 join Comment c1_1 on c1_1.id=c1_0.comments_id where c1_0.Post_id=?
-//		FetchType.EAGER 이므로 Post와 Post 의 연관관계인 Comment 를 한꺼번에 가져온다.
-		
-		// #5. Post 1개 find, Comment 1 개 생성, 연결 -> Comment persist
-		// fetch=FetchType.EAGER 없이 원복 후 테스트
-		Post p = em.find(Post.class, 1);
-		Comment c3 = new Comment();
-		c3.setContent("댓글 3 내용");
+		// #1. FetchType 설정 없이, Post 객체를 find
+//		Post post = em.find(Post.class, 1);
+// 		Hibernate: select p1_0.id,p1_0.content,p1_0.title from Post p1_0 where p1_0.id=?
 		
 		
-		// Post p 와 comment c3 연결
-//		p.setComments(List.of(c3));	// 기존 연결 모두 삭제하고 c3 연결한다는 의미
-		p.getComments().add(c3);	// 기존 연결을 유지 한 채, 새로운 c3 객체 추가
+		// #2. FetchType 설정 없이, Comment 객체를 find
+//		Comment comment = em.find(Comment.class, 1);
+//		Hibernate: select c1_0.id,c1_0.content,p1_0.id,p1_0.content,p1_0.title from Comment c1_0 left join Post p1_0 on p1_0.id=c1_0.post_id where c1_0.id=?
+		// Post 1건 select
 		
-		// 연결 후, p, c3 영속화가 되어야 한다. 근데 p 는 이미 find() 했으므로 영속화 진행된 상태
-		// c3 만 하면 된다.
-		em.persist(c3);
-//		Hibernate: select p1_0.id,p1_0.content,p1_0.title from Post p1_0 where p1_0.id=?
-//		Hibernate: select c1_0.Post_id,c1_1.id,c1_1.content from Post_Comment c1_0 join Comment c1_1 on c1_1.id=c1_0.comments_id where c1_0.Post_id=?
-//		Hibernate: insert into Comment (content) values (?)
-//		Hibernate: delete from Post_Comment where Post_id=?
-//		Hibernate: insert into Post_Comment (Post_id,comments_id) values (?,?)
-//		Hibernate: insert into Post_Comment (Post_id,comments_id) values (?,?)
-//		Hibernate: insert into Post_Comment (Post_id,comments_id) values (?,?)
+		
+		// #3. FetchType 설정 없이, Post 객체를 find, toString() 으로 comments 사용
+		Post post = em.find(Post.class, 1);
+		System.out.println(post.getComments());
+		// StackOverflowError <- 순환 참조 Post -Comment
+		// 양방향에서 Post 에 comments 를 사용하는 코드를 실행할 때, Comment 의 FetchType 이 EAGER 이므로 발생
 		
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
 		em.close();

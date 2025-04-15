@@ -12,6 +12,8 @@ import jakarta.persistence.EntityManagerFactory;
 
 // ManyToOne - OneToMany BI
 // 1. ManyToOne 을 가진 테이블이 Owing Entity
+// 2. Comment, Post 2개의 테이블이 생성
+// 3. 연관관계를 Comment 의 post_id 칼럼으로 처리
 // persist
 public class Test {
 
