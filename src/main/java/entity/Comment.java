@@ -2,6 +2,7 @@ package entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,11 +18,14 @@ public class Comment {
 	
 	private String content;
 	
-	@ManyToOne
-	private Post post;
+//	@ManyToOne
+//	private Post post;
 	
 //	@ManyToOne(cascade=CascadeType.PERSIST)
 //	private Post post;
+	
+	@ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+	private Post post;
 	
 	public int getId() {
 		return id;

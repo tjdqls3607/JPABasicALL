@@ -43,6 +43,13 @@ public class Test2 {
 		
 		
 		// #3. FetchType 설정 없이, Post 객체를 find, toString() 으로 comments 사용
+//		Post post = em.find(Post.class, 1);
+//		System.out.println(post.getComments());
+		// StackOverflowError <- 순환 참조 Post -Comment
+		// 양방향에서 Post 에 comments 를 사용하는 코드를 실행할 때, Comment 의 FetchType 이 EAGER 이므로 발생
+		
+		
+		// #4. Comment 의 ManyToOne FetchType = EAGER, Post 객체를 find, toString() 으로 comments 사용
 		Post post = em.find(Post.class, 1);
 		System.out.println(post.getComments());
 		// StackOverflowError <- 순환 참조 Post -Comment
