@@ -81,10 +81,32 @@ public class Test {
 		// 3건 모두 insert
 		// Comment의 연관 관계 칼럼인 post_id 에 Post 객체의 id 값으로 사용됨
 		
-		// #6. Post에만 Comment 2개 연결 ( OneToMany ), p 만 persist
-		p.setComments(List.of(c1, c2));
 		
-		em.persist(p);
+		// #6. Comment 에만 post 연결 (ManyToOne), c1, c2 모두 persist
+		// ManyToOne 에 cascade=CascadeType.PERSIST
+		c1.setPost(p);
+		c2.setPost(p);
+		
+
+		em.persist(c1);
+		em.persist(c2);
+//		Hibernate: insert into Post (content,title) values (?,?)
+//		Hibernate: insert into Comment (content,post_id) values (?,?)
+//		Hibernate: insert into Comment (content,post_id) values (?,?)
+		// 3건 모두 insert
+		// Comment의 연관 관계 칼럼인 post_id 에 Post 객체의 id 값으로 사용됨
+		
+		
+		
+		
+		
+		
+		
+		
+		// #7. Post에만 Comment 2개 연결 ( OneToMany ), p 만 persist
+//		p.setComments(List.of(c1, c2));
+//		
+//		em.persist(p);
 		// Hibernate: insert into Post (content,title) values (?,?)
 		// Post 1 건 insert, comment insert X
 		// ManyToOne, OneToMany 양방향의 Owing 연관 관계는 ManyToOne
