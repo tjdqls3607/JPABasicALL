@@ -81,12 +81,20 @@ public class Test {
 		// 3건 모두 insert
 		// Comment의 연관 관계 칼럼인 post_id 에 Post 객체의 id 값으로 사용됨
 		
-		// #5. Post에만 Comment 2개 연결 ( OneToMany ), p 만 persist
+		// #6. Post에만 Comment 2개 연결 ( OneToMany ), p 만 persist
 		p.setComments(List.of(c1, c2));
 		
 		em.persist(p);
-		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
 		// Hibernate: insert into Post (content,title) values (?,?)
+		// Post 1 건 insert, comment insert X
+		// ManyToOne, OneToMany 양방향의 Owing 연관 관계는 ManyToOne
+		// OneToMany 를 가진 Post 는 연관 관계 관련 칼럼 X <= Comment 가 함께 연속화 되지 않아도 된다.
+		
+		
+		
+		
+		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
+		
 		
 
 		em.close();
