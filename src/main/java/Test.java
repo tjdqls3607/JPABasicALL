@@ -81,8 +81,8 @@ public class Test {
 		
 		// #6 Post 에 Comment 연결, Post 1건만 persist
 		// CascadeType.PERSIST 를 OneToMany 에 추가
-		p.setComments(List.of(c1, c2));
-		em.persist(p);
+//		p.setComments(List.of(c1, c2));
+//		em.persist(p);
 //		Hibernate: insert into Post (content,title) values (?,?)
 //		Hibernate: insert into Comment (content) values (?)
 //		Hibernate: insert into Comment (content) values (?)
