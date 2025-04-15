@@ -52,10 +52,10 @@ public class Post {
 		this.comments = comments;
 	}
 	
-	
+	// Comment 의 toString() 상호 참조 제거
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", comments=" + comments + "]";
+		return "Post [id=" + id + ", title=" + title + ", content=" + content + "]";
 	}
 	
 
