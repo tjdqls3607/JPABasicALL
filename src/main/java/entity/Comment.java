@@ -17,11 +17,11 @@ public class Comment {
 	
 	private String content;
 	
-//	@ManyToOne
-//	private Post post;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne
 	private Post post;
+	
+//	@ManyToOne(cascade=CascadeType.PERSIST)
+//	private Post post;
 	
 	public int getId() {
 		return id;
