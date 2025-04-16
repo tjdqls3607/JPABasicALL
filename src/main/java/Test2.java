@@ -9,10 +9,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.FetchType;
 
-//ManyToOne - OneToMany BI
-//1. ManyToOne 을 가진 테이블이 Owing Entity
-//2. Comment, Post 2개의 테이블이 생성
-//3. 연관관계를 Comment 의 post_id 칼럼으로 처리
+//ManyToMany 양방향
+//teams,users, teams_users 3개의 테이블 생성확인
 // find
 public class Test2 {
 
@@ -29,7 +27,8 @@ public class Test2 {
 
 		em.getTransaction().begin();
 
-
+		// Test.java
+		// Test2는 맘대로 테스트 코드 작성
 		
 		
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
