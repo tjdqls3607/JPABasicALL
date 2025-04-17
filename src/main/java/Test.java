@@ -27,13 +27,40 @@ public class Test {
 	
 
 		// #1. join
-		String jpql = "select p, o from Product p, Orders o where p.id = o.product.id ";
+//		String jpql = "select p, o from Product p, inner join p.orders o";
+//		String jpql = "select p, o from Product p, Orders o where p.id = o.product.id ";
+//		String jpql = "select p, o from Product p, Orders o where p = o.product";
+//		String jpql = "select o, p from Product p, Orders o where p = o.product";
+//		em.createQuery(jpql, Object[].class)
+//			.getResultList()
+//			.forEach(objArray -> {
+//				System.out.println(objArray[0]);
+//				System.out.println(objArray[1]);
+//			});
+		
+////		 #2. left outer join
+////		 Customer 기준
+//		String jpql = "select c, o from Customer c left join c.orders o";
+//		
+//		em.createQuery(jpql, Object[].class)
+//		.getResultList()
+//		.forEach(objArray -> {
+//			System.out.println(objArray[0]);
+//			System.out.println(objArray[1]);
+//		});
+		
+		
+		
+//		 #3. left outer join + count + group by
+//		 Customer 기준
+		String jpql = "select c, o from Customer c left join c.orders o";
+		
 		em.createQuery(jpql, Object[].class)
-			.getResultList()
-			.forEach(objArray -> {
-				System.out.println(objArray[0]);
-				System.out.println(objArray[1]);
-			});
+		.getResultList()
+		.forEach(objArray -> {
+			System.out.println(objArray[0]);
+			System.out.println(objArray[1]);
+		});
 		
 		
 		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
