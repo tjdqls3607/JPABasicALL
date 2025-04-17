@@ -1,6 +1,6 @@
 package entity;
 import java.time.LocalDate;
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,7 +8,26 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+
 @Entity
+// 복수개의 @NamedQuery 를 사용할 경우, @NamedQueries 로 묶어 준다. {} 필요
+@NamedQueries({
+	@NamedQuery(
+		name="Orders.findByOrderDate",
+		query="select o from Orders o where o.orderDate = :orderDate"
+	),
+	@NamedQuery(
+		name="Orders.findByOrderDateRange",
+		query="select o from Orders o where o.orderDate between :startDate and :endDate"
+	),
+	@NamedQuery(
+		name="Orders.findByProductPriceRange",
+		query="select o, p.price from Orders o join o.product p where p.price between :startPrice and :endPrice"
+	)
+})
+
 public class Orders {
     
     @Id
